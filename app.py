@@ -19,18 +19,18 @@ def annotate_text():
         entities = [{'start': ent.start_char, 'end': ent.end_char, 'label': ent.label_}
                     for ent in doc.ents]
 
-        # Parse entities and create a structured response with lists
-        response = {'from': [], 'to': [], 'time': [], 'mode': []}
+        # Parse entities and create a structured response
+        response = {}
         for entity in entities:
             label = entity['label']
             if label == 'FROM':
-                response['from'].append(text[entity['start']:entity['end']])
+                response['from'] = text[entity['start']:entity['end']]
             elif label == 'TO':
-                response['to'].append(text[entity['start']:entity['end']])
+                response['to'] = text[entity['start']:entity['end']]
             elif label == 'TIME':
-                response['time'].append(text[entity['start']:entity['end']])
+                response['time'] = text[entity['start']:entity['end']]
             elif label == 'MODE':
-                response['mode'].append(text[entity['start']:entity['end']])
+                response['mode'] = text[entity['start']:entity['end']]
 
         return jsonify(response)
 
